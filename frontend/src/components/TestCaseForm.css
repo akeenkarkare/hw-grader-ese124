@@ -1,0 +1,15 @@
+.test-case-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.test-case-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.test-case-form .form-group:last-of-type {
+  margin-bottom: 1rem;
+}
+

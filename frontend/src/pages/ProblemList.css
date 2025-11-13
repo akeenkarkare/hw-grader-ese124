@@ -1,0 +1,85 @@
+.problem-list-header {
+  margin-bottom: 2rem;
+}
+
+.problem-list-header h1 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.problem-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.problem-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.problem-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.problem-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.problem-card-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.problem-description-preview {
+  color: #555;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.problem-card-footer {
+  padding-top: 1rem;
+  border-top: 1px solid #ecf0f1;
+}
+
+.test-case-count {
+  color: #7f8c8d;
+  font-size: 0.875rem;
+}
+
+.no-problems {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #7f8c8d;
+}
+
+.no-problems p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+

@@ -1,0 +1,159 @@
+.admin-dashboard {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  min-height: calc(100vh - 60px);
+}
+
+.admin-sidebar {
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.problem-form {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.problem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.problem-list-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.problem-list-item:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.problem-list-item.active {
+  border: 2px solid #3498db;
+}
+
+.problem-list-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.problem-list-item-header h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.problem-list-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #7f8c8d;
+}
+
+.admin-content {
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.content-header h1 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.content-section {
+  margin-bottom: 2rem;
+}
+
+.content-section h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.description-box {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.description-box pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.test-case-controls {
+  display: flex;
+  align-items: center;
+}
+
+.test-case-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.test-case-group h4 {
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+.no-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1200px) {
+  .admin-dashboard {
+    grid-template-columns: 1fr;
+  }
+  
+  .admin-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
