@@ -1,8 +1,11 @@
+"use client"
 import './SubmissionResult.css'
+import React, { useEffect, useState } from 'react'
+import {createPortal} from 'react-dom'
 
-const SubmissionResult = ({ submission }) => {
-  if (!submission) return null
-
+const SubmissionResult = ({ submission, clearCurrentSubmission}) => {
+  if (!submission) return null;
+  
   // Handle both JSON object (new) and JSON string (old)
   const results = typeof submission.results === 'string'
     ? JSON.parse(submission.results)
@@ -10,17 +13,19 @@ const SubmissionResult = ({ submission }) => {
 
   const hasError = submission.status === 'error' || results.error
   const isCompilationError = submission.status === 'compilation_error'
-
-  return (
-    <div className="submission-result">
+  return createPortal((
+    <div className="submission-result ">
       <div className="result-header">
         <h3>Submission Result</h3>
+        <div className='spacer'></div>
         <div className="score">
           Score: <span className={`score-value ${submission.score === 100 ? 'perfect-score' : ''}`}>
             {submission.score.toFixed(1)}%
           </span>
         </div>
+        <button className = "close-button"onClick={clearCurrentSubmission}>X</button>
       </div>
+      
 
       {isCompilationError && (
         <div className="alert alert-error">
@@ -62,7 +67,7 @@ const SubmissionResult = ({ submission }) => {
                 )}
                 
                 {!result.passed && !result.compile_output && (
-                  <>
+                  <div className='test-detail-container'>
                     <div className="test-detail">
                       <strong>Expected:</strong>
                       <pre>{result.expected_output}</pre>
@@ -71,7 +76,7 @@ const SubmissionResult = ({ submission }) => {
                       <strong>Got:</strong>
                       <pre>{result.actual_output || '(no output)'}</pre>
                     </div>
-                  </>
+                  </div>
                 )}
                 
                 {result.time && (
@@ -85,7 +90,7 @@ const SubmissionResult = ({ submission }) => {
         </div>
       )}
     </div>
-  )
+  ), document.body)
 }
 
 export default SubmissionResult

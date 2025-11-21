@@ -61,7 +61,7 @@ const ProblemSolver = () => {
       setLoading(false)
     }
   }
-
+  
   const fetchUserTestCases = async () => {
     try {
       const response = await axios.get(`/api/problems/${id}/user-testcases`)
@@ -150,6 +150,9 @@ const ProblemSolver = () => {
       setSubmitting(false)
     }
   }
+
+  const clearCurrentSubmission = () =>{ 
+    setCurrentSubmission(null)};
 
   if (loading) {
     return (
@@ -298,7 +301,7 @@ const ProblemSolver = () => {
           />
 
           {currentSubmission && (
-            <SubmissionResult submission={currentSubmission} />
+            <SubmissionResult submission={currentSubmission} clearCurrentSubmission={clearCurrentSubmission} />
           )}
         </div>
       </div>
