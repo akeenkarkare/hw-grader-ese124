@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer} from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
@@ -8,6 +8,29 @@ import TestCaseList from '../components/TestCaseList'
 import TestCaseForm from '../components/TestCaseForm'
 import SubmissionResult from '../components/SubmissionResult'
 import './ProblemSolver.css'
+import FileExplorer from '@components/FileExplorer/FileExplorer'
+
+const useCode = () => {
+  const [files, setFiles] = useState(() => {
+    return {
+      source_code: '#include <stdio.h>\n\nint main() {\n    // Write your code here\n    \n    return 0;\n}',
+      language_id: 89,
+      compile: '',
+      additional_files: [
+        
+      ]
+    }
+  });
+
+  const submitFiles = async ()=>{
+    // get the file code strings from "additional_files", convert them all to base64, and zip up the strings so that they are in aformat that can be used for judge0 api.
+    
+    const options = {}; // judge0 submission option
+    const response = await axios.post('/api/submit', )
+  }
+  const clearFiles = async () => {}
+
+}
 
 const ProblemSolver = () => {
   const { id } = useParams()
@@ -22,9 +45,13 @@ const ProblemSolver = () => {
   const [showAddTestCase, setShowAddTestCase] = useState(false)
   const [autoSaveStatus, setAutoSaveStatus] = useState('')
 
+  const [showFileViewer, setFileViewer] = useState(true);
+
+
+
   // Load code from localStorage on mount
   useEffect(() => {
-    const savedCode = localStorage.getItem(`problem_${id}_code`)
+    const savedCode = localStorage.getItem(`problem_${id}_code`);
     if (savedCode) {
       setCode(savedCode)
       setAutoSaveStatus('Loaded from auto-save')
@@ -36,7 +63,7 @@ const ProblemSolver = () => {
   useEffect(() => {
     if (code && problem) {
       const timeoutId = setTimeout(() => {
-        localStorage.setItem(`problem_${id}_code`, code)
+        localStorage.setItem(`problem_${id}_code`, code) // update
         setAutoSaveStatus('Auto-saved')
         setTimeout(() => setAutoSaveStatus(''), 2000)
       }, 1000)
@@ -259,8 +286,10 @@ const ProblemSolver = () => {
             )}
           </div>
         </div>
-
-        <div className="code-panel">
+            {/* solutions */}
+        <div className='flex flex-row h-full'>
+          <FileExplorer/> 
+          <div className="code-panel h-full grow-2">
           <div className="code-header">
             <div>
               <h2>Your Solution</h2>
@@ -287,23 +316,26 @@ const ProblemSolver = () => {
               </button>
             </div>
           </div>
-
+            
           {error && (
             <div className={`alert ${error.includes('Perfect') ? 'alert-success' : 'alert-error'}`}>
               {error}
             </div>
           )}
-
+          
           <CodeEditor
             value={code}
             onChange={(value) => setCode(value || '')}
             height="500px"
           />
+            
+         
 
           {currentSubmission && (
             <SubmissionResult submission={currentSubmission} clearCurrentSubmission={clearCurrentSubmission} />
           )}
         </div>
+      </div>
       </div>
     </>
   )

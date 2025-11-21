@@ -1,0 +1,40 @@
+/* just for */
+@import "index.css";
+@import "tailwindcss";
+
+/*top bar*"*/
+.div-top-bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  padding-bottom: calc(var(--spacing) * 2);
+}
+
+.p-tb{
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(42, 42, 42);
+  font-size: x-small;
+  letter-spacing: 0.025em;
+  /*font-bold uppercase text-gray-400 text-xs tracking-wide*/
+}
+
+.div-new{
+  display: flex;
+  align-items: center;
+  color: rgb(40, 40, 45);
+  
+/*  flex items-center text-gray-200 space-x-2;*/ /*styles copied from tailwind lol*/
+  & > :not(:last-child) {
+    --tw-space-x-reverse: 0;
+    margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
+    margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
+  };
+}
+
+.div-folder{
+  
+  margin-left: calc(var(0.25rem) * 4);
+
+}
