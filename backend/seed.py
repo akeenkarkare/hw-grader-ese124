@@ -26,6 +26,20 @@ def seed_database():
             print("✓ Created admin user (username: admin, password: admin123)")
         else:
             print("✓ Admin user already exists")
+
+        # Check if student test user exists
+        student = db.query(models.User).filter(models.User.username == "student").first()
+        if not student:
+            # Create test student user
+            student = models.User(
+                username="student",
+                password_hash=get_password_hash("student123"),
+                role="student"
+            )
+            db.add(student)
+            print("✓ Created student user (username: student, password: student123)")
+        else:
+            print("✓ Student user already exists")
         
         # Check if sample problem exists
         sample_problem = db.query(models.Problem).filter(models.Problem.title == "Sum of Two Numbers").first()
@@ -174,8 +188,8 @@ A single integer representing the sum.
         db.commit()
         print("\n✅ Database seeded successfully!")
         print("\n📝 Login credentials:")
-        print("   Username: admin")
-        print("   Password: admin123")
+        print("   Admin  - Username: admin,   Password: admin123")
+        print("   Student - Username: student, Password: student123")
         
     except Exception as e:
         print(f"❌ Error seeding database: {e}")

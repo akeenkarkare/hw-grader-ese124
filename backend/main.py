@@ -231,10 +231,10 @@ def get_problems(
     result = []
     for problem in problems:
         visible_test_cases = [
-            tc for tc in problem.test_cases 
+            tc for tc in problem.test_cases
             if not tc.is_hidden
         ]
-        visible_test_cases.sort(key=lambda x: x.display_order)
+        visible_test_cases.sort(key=lambda x: x.display_order if x.display_order is not None else 0)
         
         problem_dict = {
             "id": problem.id,
@@ -310,7 +310,15 @@ async def submit_code(
 
     # Execute code against hidden test cases
     try:
-        results = await judge0_client.execute_code(submission.code, hidden_test_cases)
+        # Convert additional_files from Pydantic models to dicts if present
+        additional_files_dict = None
+        if submission.additional_files:
+            additional_files_dict = [
+                {"filename": f.filename, "content": f.content}
+                for f in submission.additional_files
+            ]
+
+        results = await judge0_client.execute_code(submission.code, hidden_test_cases, additional_files_dict)
 
         # Check for compilation errors
         compilation_error = next((r for r in results if r.get("compile_output")), None)

@@ -49,8 +49,8 @@ class TestCasePublic(BaseModel):
     id: int
     input: str
     expected_output: str
-    display_order: int
-    
+    display_order: Optional[int] = 0
+
     class Config:
         from_attributes = True
 
@@ -83,9 +83,14 @@ class ProblemPublic(ProblemBase):
         from_attributes = True
 
 # Submission Schemas
+class AdditionalFile(BaseModel):
+    filename: str
+    content: str  # Base64 encoded file content
+
 class SubmissionCreate(BaseModel):
     problem_id: int
     code: str
+    additional_files: Optional[List[AdditionalFile]] = None  # For multi-file programs (ADT, headers, etc.)
 
 class SubmissionResponse(BaseModel):
     id: int
