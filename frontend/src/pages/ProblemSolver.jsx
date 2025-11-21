@@ -10,28 +10,6 @@ import SubmissionResult from '../components/SubmissionResult'
 import './ProblemSolver.css'
 import FileExplorer from '@components/FileExplorer/FileExplorer'
 
-const useCode = () => {
-  const [files, setFiles] = useState(() => {
-    return {
-      source_code: '#include <stdio.h>\n\nint main() {\n    // Write your code here\n    \n    return 0;\n}',
-      language_id: 89,
-      compile: '',
-      additional_files: [
-        
-      ]
-    }
-  });
-
-  const submitFiles = async ()=>{
-    // get the file code strings from "additional_files", convert them all to base64, and zip up the strings so that they are in aformat that can be used for judge0 api.
-    
-    const options = {}; // judge0 submission option
-    const response = await axios.post('/api/submit', )
-  }
-  const clearFiles = async () => {}
-
-}
-
 const ProblemSolver = () => {
   const { id } = useParams()
   const [problem, setProblem] = useState(null)
@@ -44,10 +22,6 @@ const ProblemSolver = () => {
   const [error, setError] = useState('')
   const [showAddTestCase, setShowAddTestCase] = useState(false)
   const [autoSaveStatus, setAutoSaveStatus] = useState('')
-
-  const [showFileViewer, setFileViewer] = useState(true);
-
-
 
   // Load code from localStorage on mount
   useEffect(() => {
