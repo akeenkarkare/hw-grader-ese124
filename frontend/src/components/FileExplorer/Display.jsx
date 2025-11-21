@@ -8,13 +8,17 @@ export default function Display(props) {
 
   useEffect(() => {
     if (addNew) {
-      if (open) {
-        if (!open.includes(addNew.id)) setOpen((prev) => [...prev, addNew.id]);
-      } else {
-        setOpen([addNew.id]);
-      }
+      setOpen((prev) => {
+        if (!prev || prev.length === 0) {
+          return [addNew.id];
+        }
+        if (!prev.includes(addNew.id)) {
+          return [...prev, addNew.id];
+        }
+        return prev;
+      });
     }
-  }, [addNew, open]);
+  }, [addNew]);
 
   const toggleFolderState = (id) => {
     if (open.length === 0) {
@@ -26,23 +30,16 @@ export default function Display(props) {
   };
 
   const getChild = (cd) => {
-    let val;
-    data.forEach((d) => {
-      if (d.id === cd) {
-        val = d;
-      }
-    });
-    return val;
+    return data.find((d) => d.id === cd);
   };
 
   const getChildrens = () => {
     if (data) {
-      const folders = data.filter((d) => d.children && d.children.length > 1);
+      const folders = data.filter((d) => d.children && d.children.length > 0);
       let childrens = [];
 
       folders.forEach((fd) => {
         fd.children.forEach((cd) => {
-          console.log("child")
           childrens.push(cd);
         });
       });
@@ -51,17 +48,17 @@ export default function Display(props) {
   };
 
   const getRootFolders = () => {
-    console.log(data)
-    if (data ) {
+    if (data) {
+      const childrens = getChildrens();
       let rootFolders = [];
       data.forEach((d) => {
-        if (!getChildrens().includes(d.id)) {
+        if (!childrens.includes(d.id)) {
           rootFolders.push(d);
         }
       });
       return rootFolders;
     }
-    return []
+    return [];
   };
 
   const render = () => {

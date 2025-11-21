@@ -18,7 +18,7 @@ export default function FileExplorer(){
   }, []);
 
   useEffect(() => {
-    if (data) localStorage.setItem("data", JSON.stringify(data));
+    if (data && data.length > 0) localStorage.setItem("data", JSON.stringify(data));
   }, [data]);
 
   const props = {

@@ -21,6 +21,7 @@ export default function Folder(props) {
       <div className="ml-4!">
         {children.map((cd) => {
           const d = getChild(cd);
+          if (!d) return null;
           if (d.type === "folder")
             return (
               <Folder

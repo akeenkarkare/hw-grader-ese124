@@ -15,7 +15,6 @@ export default function New(props) {
   };
 
   const newFile = (e) => {
-    console.log("new file clicked")
     e.stopPropagation();
     setAddNew({
       id,

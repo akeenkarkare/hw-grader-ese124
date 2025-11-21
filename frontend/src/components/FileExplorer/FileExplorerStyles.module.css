@@ -1,8 +1,6 @@
-/* just for */
-@import "index.css";
 @import "tailwindcss";
 
-/*top bar*"*/
+/* top bar */
 .div-top-bar{
   display: flex;
   align-items: center;
@@ -34,7 +32,5 @@
 }
 
 .div-folder{
-  
-  margin-left: calc(var(0.25rem) * 4);
-
+  margin-left: 1rem;
 }

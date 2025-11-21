@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer} from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
@@ -289,7 +289,7 @@ const ProblemSolver = () => {
             {/* solutions */}
         <div className='flex flex-row h-full'>
           <FileExplorer/> 
-          <div className="code-panel h-full grow-2">
+          <div className="code-panel h-full grow-[2]">
           <div className="code-header">
             <div>
               <h2>Your Solution</h2>
