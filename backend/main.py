@@ -260,10 +260,11 @@ def get_problem(
         raise HTTPException(status_code=404, detail="Problem not found")
     
     visible_test_cases = [
-        tc for tc in problem.test_cases 
+        tc for tc in problem.test_cases
         if not tc.is_hidden
     ]
-    visible_test_cases.sort(key=lambda x: x.display_order)
+    # Sort by display_order, treating None as 0
+    visible_test_cases.sort(key=lambda x: x.display_order if x.display_order is not None else 0)
     
     problem_dict = {
         "id": problem.id,
