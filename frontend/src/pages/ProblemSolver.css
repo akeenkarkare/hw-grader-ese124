@@ -16,6 +16,9 @@
   padding: 2rem;
   overflow-y: auto;
   max-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .problem-header {

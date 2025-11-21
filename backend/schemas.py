@@ -33,7 +33,7 @@ class TestCaseBase(BaseModel):
     input: str
     expected_output: str
     is_hidden: bool = False
-    display_order: int = 0
+    display_order: Optional[int] = 0
 
 class TestCaseCreate(TestCaseBase):
     pass

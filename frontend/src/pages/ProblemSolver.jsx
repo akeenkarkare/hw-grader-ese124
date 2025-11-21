@@ -8,6 +8,7 @@ import TestCaseList from '../components/TestCaseList'
 import TestCaseForm from '../components/TestCaseForm'
 import SubmissionResult from '../components/SubmissionResult'
 import './ProblemSolver.css'
+import FileExplorer from '@components/FileExplorer/FileExplorer'
 
 const ProblemSolver = () => {
   const { id } = useParams()
@@ -24,7 +25,7 @@ const ProblemSolver = () => {
 
   // Load code from localStorage on mount
   useEffect(() => {
-    const savedCode = localStorage.getItem(`problem_${id}_code`)
+    const savedCode = localStorage.getItem(`problem_${id}_code`);
     if (savedCode) {
       setCode(savedCode)
       setAutoSaveStatus('Loaded from auto-save')
@@ -36,7 +37,7 @@ const ProblemSolver = () => {
   useEffect(() => {
     if (code && problem) {
       const timeoutId = setTimeout(() => {
-        localStorage.setItem(`problem_${id}_code`, code)
+        localStorage.setItem(`problem_${id}_code`, code) // update
         setAutoSaveStatus('Auto-saved')
         setTimeout(() => setAutoSaveStatus(''), 2000)
       }, 1000)
@@ -259,8 +260,10 @@ const ProblemSolver = () => {
             )}
           </div>
         </div>
-
-        <div className="code-panel">
+            {/* solutions */}
+        <div className='flex flex-row h-full'>
+          <FileExplorer/> 
+          <div className="code-panel h-full grow-[2]">
           <div className="code-header">
             <div>
               <h2>Your Solution</h2>
@@ -287,23 +290,26 @@ const ProblemSolver = () => {
               </button>
             </div>
           </div>
-
+            
           {error && (
             <div className={`alert ${error.includes('Perfect') ? 'alert-success' : 'alert-error'}`}>
               {error}
             </div>
           )}
-
+          
           <CodeEditor
             value={code}
             onChange={(value) => setCode(value || '')}
             height="500px"
           />
+            
+         
 
           {currentSubmission && (
             <SubmissionResult submission={currentSubmission} clearCurrentSubmission={clearCurrentSubmission} />
           )}
         </div>
+      </div>
       </div>
     </>
   )
